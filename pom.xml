@@ -1,0 +1,188 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+
+  <groupId>com.sysservesolutions</groupId>
+  <artifactId>sysdesk</artifactId>
+  <version>1.0.0.12-SNAPSHOT</version>
+
+  <name>sysdesk</name>
+
+  <packaging>war</packaging>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <batik.version>1.6</batik.version>
+    <build.config>dev</build.config>
+    <build.name>sysdesk</build.name>
+    <servlet.api.version>2.5</servlet.api.version>
+    <struts2.version>2.3.37</struts2.version>
+    <slf4j.version>1.7.21</slf4j.version>
+    <mysql.version>8.0.27</mysql.version>
+    <springframework.version>4.3.29.RELEASE</springframework.version>
+    <tomcat.manager.url>http://localhost:8081/manager/text</tomcat.manager.url>
+    <springframework.security.version>3.2.5.RELEASE</springframework.security.version>
+    <hibernate.version>3.6.10.Final</hibernate.version>
+    <jasperreport.version>6.6.0</jasperreport.version>
+    <jwt.version>3.4.0</jwt.version>
+    <mapstruct.version>1.2.0.Final</mapstruct.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.struts/struts2-core -->
+    <dependency>
+      <groupId>org.apache.struts</groupId>
+      <artifactId>struts2-core</artifactId>
+      <version>2.5.32</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.struts/struts2-convention-plugin -->
+    <dependency>
+      <groupId>org.apache.struts</groupId>
+      <artifactId>struts2-convention-plugin</artifactId>
+      <version>6.3.0.2</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.6.0</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+
+
+    <!-- https://mvnrepository.com/artifact/org.apache.struts/struts2-dojo-plugin -->
+    <dependency>
+      <groupId>org.apache.struts</groupId>
+      <artifactId>struts2-dojo-plugin</artifactId>
+      <version>2.3.37</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core -->
+    <dependency>
+      <groupId>org.hibernate.orm</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>6.4.1.Final</version>
+    </dependency>
+
+
+
+  </dependencies>
+
+  <build>
+    <finalName>${build.name}_${build.config}</finalName>
+    <!--this is default profile and it is dev profile-->
+
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.png</include>
+          <include>**/*.html</include>
+        </includes>
+      </resource>
+    </resources>
+
+
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
+        <configuration>
+          <release>11</release>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <warSourceExcludes>WEB-INF/lib/bcprov-jdk14-1.38.jar</warSourceExcludes>
+          <packagingExcludes>WEB-INF/lib/bcprov-jdk14-1.38.jar</packagingExcludes>
+          <packagingExcludes>WEB-INF/lib/bcprov-jdk14-138.jar</packagingExcludes>
+          <warSourceExcludes>WEB-INF/lib/bcprov-jdk14-138.jar</warSourceExcludes>
+          <filters>
+            <filter>config/${build.config}.properties</filter>
+          </filters>
+          <nonFilteredFileExtensions>
+            <!-- default value contains jpg,jpeg,gif,bmp,png -->
+            <nonFilteredFileExtension>jar</nonFilteredFileExtension>
+          </nonFilteredFileExtensions>
+          <webResources>
+
+
+            <resource>
+              <directory>src/main/webapp/WEB-INF/</directory>
+              <includes>
+                <include>applicationContext.xml</include>
+                <include>helpdesk.properties</include>
+                <include>web.xml</include>
+              </includes>
+              <filtering>true</filtering>
+              <targetPath>WEB-INF</targetPath>
+            </resource>
+
+            <resource>
+              <directory>src/main/webapp/META-INF/</directory>
+              <includes>
+                <include>context.xml</include>
+              </includes>
+              <filtering>true</filtering>
+              <targetPath>META-INF</targetPath>
+            </resource>
+          </webResources>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.tomcat.maven</groupId>
+        <artifactId>tomcat7-maven-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <path>/sysdesk</path>
+          <url>${tomcat.manager.url}</url>
+          <server>TomcatServer</server>
+          <port>8081</port>
+        </configuration>
+        <executions>
+          <execution>
+            <id>running-war file</id>
+            <goals>
+              <goal>run-war</goal>
+            </goals>
+            <configuration>
+              <path>/sysdesk</path>
+              <warDirectory>${project.basedir}/target/sysdesk/</warDirectory>
+              <port>8081</port>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

@@ -1,0 +1,23 @@
+<!-- hibernate.cfg.xml -->
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5431/fleetapp</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">password</property>
+
+        <!-- Specify PostgreSQL dialect -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+
+        <!-- Enable automatic table generation -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- Specify annotated entity class -->
+<!--        <mapping class="fleetmanagement.pojo.DetailsPojo"/>-->
+        <mapping resource="LoginInfoPojo.hbm.xml"/>
+
+    </session-factory>
+</hibernate-configuration>
