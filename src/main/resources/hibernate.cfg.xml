@@ -5,9 +5,9 @@
     <session-factory>
         <!-- Database connection settings -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5431/fleetapp</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/sysserve</property>
         <property name="hibernate.connection.username">postgres</property>
-        <property name="hibernate.connection.password">password</property>
+        <property name="hibernate.connection.password">Lawntennis1.</property>
 
         <!-- Specify PostgreSQL dialect -->
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
@@ -16,8 +16,13 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <!-- Specify annotated entity class -->
-<!--        <mapping class="fleetmanagement.pojo.DetailsPojo"/>-->
-        <mapping resource="LoginInfoPojo.hbm.xml"/>
+        <mapping class="fleetmanagement.pojo.DetailsPojo"/>
+        <mapping class="fleetmanagement.pojo.TripsPojo"/>
+        <mapping class="fleetmanagement.pojo.FilePojo"/>
+        <mapping class="fleetmanagement.pojo.HistoryPojo"/>
+        <mapping class="fleetmanagement.pojo.LoginInfoPojo" resource="LoginInfoPojo.hbm.xml"/>
+<!--        <property name="hibernate.package_scanner.autodetection" value="class, hbm"/>-->
+
 
     </session-factory>
 </hibernate-configuration>

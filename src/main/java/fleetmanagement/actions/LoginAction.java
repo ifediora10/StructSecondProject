@@ -12,7 +12,7 @@ import org.apache.struts2.convention.annotation.*;
 
 @Action("/loginAction")
 //@Result(name = "success", location = "/success.jsp")
-@Results({@Result(name = "success", location = "/newrequest.jsp"),
+@Results({@Result(name = "success", location = "/welcome.jsp"),
         @Result(name = "input", location = "/login.jsp")
 })
 @Validations(
@@ -32,7 +32,7 @@ public class LoginAction extends ActionSupport {
 
     public String execute(){
        String statusCode = "";
-       boolean isUserValid = LoginDAO.isUserValid(new LoginInfoPojo(id, username,password));
+       boolean isUserValid = LoginDAO.isUserValid(new LoginInfoPojo(null, username,password));
         ServletActionContext.getRequest().getSession().setAttribute("loggedInUser", username);
 
 
@@ -53,13 +53,13 @@ public class LoginAction extends ActionSupport {
         this.username = username;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public String getPassword() {
         return password;

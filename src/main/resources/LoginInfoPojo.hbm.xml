@@ -3,7 +3,7 @@
 <hibernate-mapping>
 
     <class name="fleetmanagement.pojo.LoginInfoPojo" table="login_info">
-        <id name="id" type="java.lang.Long">
+        <id name="id" type="Long">
             <column name="id"/>
             <generator class="identity"/>
         </id>

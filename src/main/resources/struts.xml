@@ -14,6 +14,24 @@
             </interceptor-stack>
         </interceptors>
 
+        <action name="historyPage" class="fleetmanagement.actions.TripList">
+            <result name="success">/listOfTrips.jsp</result>
+        </action>
+
+        <action name="trips" class="fleetmanagement.actions.AddTrips">
+            <result name="success">/trip.jsp</result>
+        </action>
+
+        <action name="uploadFile" class="fleetmanagement.actions.UploadFileAction">
+            <result name="success">/fileUploadResult.jsp</result>
+            <result name="error">/error.jsp</result>
+            <result name="input">/addDocument.jsp</result>
+        </action>
+
+        <action name="history" class="fleetmanagement.actions.HistoryAction">
+            <result name="success">/history.jsp</result>
+            <!-- Add more result configurations if needed -->
+        </action>
 
     </package>
 </struts>

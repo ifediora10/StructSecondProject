@@ -8,7 +8,7 @@
 <h1>UPDATE SUCCESS</h1>
 <p>
     Request #140 was successfully updated.
-    Click here to view/edit it. Or here to go back to request list.
+    Click <a href="welcome.jsp">Here</a> to go back to request list.
 
 </p>
 </body>

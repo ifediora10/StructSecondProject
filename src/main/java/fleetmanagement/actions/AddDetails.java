@@ -1,13 +1,27 @@
-package fleetmanagement.pojo;
+package fleetmanagement.actions;
 
-import jakarta.persistence.*;
+import com.opensymphony.xwork2.ActionSupport;
+import fleetmanagement.dao.DetailsDAO;
+import fleetmanagement.dao.TripsDAO;
+import fleetmanagement.dbutil.HibernateUtil;
+import fleetmanagement.pojo.DetailsPojo;
+import fleetmanagement.pojo.TripsPojo;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.hibernate.Session;
 
-@Entity
-@Table(name = "details")
-public class DetailsPojo {
+import java.util.List;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+@Action("/details")
+@Results({
+        @Result(name = "success", location = "/success.jsp"),
+        @Result(name = "error", location = "/error.jsp")
+})
+//@Namespace("newrequest")
+public class AddDetails extends ActionSupport {
+
     private Long id;
     private String office;
     private String owner;
@@ -21,26 +35,15 @@ public class DetailsPojo {
     private String remark;
     private String comments;
 
+    public String execute(){
 
-    public DetailsPojo() {
+        DetailsPojo details = new DetailsPojo(id, office, owner, clientType, date, name, newContactName, existingContact, email,
+                phone, remark, comments);
 
-    }
+        DetailsDAO detailsDAO = new DetailsDAO();
+        detailsDAO.saveDetails(details);
 
-    public DetailsPojo(Long id, String office, String owner, String clientType, String date,
-                       String name, String newContactName, String existingContact, String email,
-                       String phone, String remark, String comments) {
-        this.id = id;
-        this.office = office;
-        this.owner = owner;
-        this.clientType = clientType;
-        this.date = date;
-        this.name = name;
-        this.newContactName = newContactName;
-        this.existingContact = existingContact;
-        this.email = email;
-        this.phone = phone;
-        this.remark = remark;
-        this.comments = comments;
+        return "success";
     }
 
     public Long getId() {

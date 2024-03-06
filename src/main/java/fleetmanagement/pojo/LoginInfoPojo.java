@@ -3,12 +3,11 @@ package fleetmanagement.pojo;
 
 import jakarta.persistence.*;
 
-//@Entity
-//@Table(name = "login_info")
+@Entity
+@Table(name = "login_info")
 public class LoginInfoPojo {
-
-   // @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String username;
     String password;
