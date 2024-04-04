@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trip History</title>
+    <title>List of Trip</title>
     <!-- Add your CSS styles or link to an external stylesheet here -->
 </head>
 <body>
@@ -71,6 +71,9 @@
         </s:iterator>
         </tbody>
     </table>
+<s:form action="generatePdfAction">
+    <s:submit value="Report"/>
+</s:form>
 <%--</s:if>--%>
 
 <%--<s:else>--%>

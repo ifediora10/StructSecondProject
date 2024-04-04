@@ -1,13 +1,14 @@
-package fleetmanagement.report;
+package fleetmanagement.actions;
 
 import com.opensymphony.xwork2.ActionSupport;
 import fleetmanagement.dao.TripsDAO;
 import fleetmanagement.dbutil.HibernateUtil;
 import fleetmanagement.pojo.TripsPojo;
-import fleetmanagement.report.DetailsReportDataSource;
+import fleetmanagement.report.TripsReportDataSource;
 import net.sf.jasperreports.engine.*;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.hibernate.Session;
@@ -26,8 +27,8 @@ public class RequestListReport extends ActionSupport {
         try
                 (Session session = HibernateUtil.getSessionFactory().openSession())
         {
-            List<TripsPojo> tripList = TripsDAO.getAllTrips();
-            TripsReportDataSource dataSource = new TripsReportDataSource(detailsList);
+            List<TripsPojo> tripsList = TripsDAO.getAllTrips();
+            TripsReportDataSource dataSource = new TripsReportDataSource(tripsList);
 
             InputStream templateStream = getClass().getResourceAsStream("/newRequestReport.jrxml");
 

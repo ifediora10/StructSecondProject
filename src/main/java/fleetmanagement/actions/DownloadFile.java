@@ -48,20 +48,6 @@ public class DownloadFile extends ActionSupport {
             return "error";
     }
 
-//    @Action("downloadHistoryAction")
-//    public String history() {
-//        System.out.println("Executing DownloadFile action for id: " + id);
-//
-//        HistoryPojo history = HistoryDAO.getHistoryFileById(id);
-//        if (history != null) {
-//            fileInputStream = new ByteArrayInputStream(history.getFileContent());
-//            fileName = history.getFileName();
-//            return "success";
-//        } else
-//            return "error";
-//    }
-
-
     public Long getId() {
         return id;
     }

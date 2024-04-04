@@ -1,9 +1,12 @@
 package fleetmanagement.actions;
 
 import com.opensymphony.xwork2.ActionSupport;
+import fleetmanagement.dao.HistoryDAO;
 import fleetmanagement.dao.TripsDAO;
+import fleetmanagement.pojo.HistoryPojo;
 import fleetmanagement.pojo.TripsPojo;
 import jakarta.persistence.Lob;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
@@ -12,6 +15,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 
 @Action(value = "/updateTrip", results = {
         @Result(name = "success", type = "redirectAction", params = {"actionName", "historyPage"}),
@@ -66,6 +70,12 @@ public class UpdateTrip extends ActionSupport {
                         totalAmount, true, fileName, file);
 
                 int recordUpdated = tripsDAO.updateTrip(trip);
+
+                String user = ServletActionContext.getRequest().getSession().getAttribute("loggedInUser").toString();
+                HistoryPojo historyPojo = new HistoryPojo(
+                        trip, new Date(), "update" , user
+                );
+                new HistoryDAO().addHistoryEvent(trip.getId(), historyPojo);
 
                 if (recordUpdated == 1) {
                     return SUCCESS;
